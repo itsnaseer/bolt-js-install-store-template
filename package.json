@@ -1,5 +1,5 @@
 {
-  "name": "slackbrix",
+  "name": "app-name",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
@@ -28,6 +28,4 @@
   "engines": {
     "node": "20.x"
   }
-
-
 }

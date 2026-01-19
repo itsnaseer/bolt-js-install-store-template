@@ -1,36 +1,73 @@
-# Slackbrix
+# Bolt JS Installation Store Template
 
-Slackbrix is a modular, enterprise-ready Slack app framework designed for **multi-organization distribution**, **Slack Enterprise Grid**, and **OAuth-based installs**. It provides a reusable foundation for building Slack apps that securely manage per-installation tokens and avoid hard-coded environment credentials.
+## Overview
+This template provides a starting point for building applications using the Bolt framework for Slack, integrated with Prisma for database management. It is designed to be easily customizable for various use cases.
 
-This repository is intended as a **starter + reference implementation** for Slack apps that must scale across many Slack organizations.
+## Features
+- **Prisma Integration**: Utilize Prisma for database interactions with a PostgreSQL adapter.
+- **Environment Configuration**: Load environment variables using dotenv.
+- **Slack App Framework**: Built on the Slack Bolt framework for easy Slack app development.
 
----
+## Getting Started
 
-## Key Features
+### Prerequisites
+- Node.js (version 14 or higher)
+- PostgreSQL database (installed and running)
+- A Slack app created in your Slack workspace
 
-- OAuth v2 installation flow using Slack Bolt + ExpressReceiver  
-- Enterprise Grid–ready (supports org-wide installs)  
-- Per-installation token storage (no global bot tokens)  
-- Prisma-backed persistence for install metadata and tokens  
-- Modular “install kit” designed for reuse across apps  
-- One-click install entry point (within Slack’s admin constraints)
+### Database Setup
+1. Ensure PostgreSQL is installed and running on your system.
+2. Create a new database for the application:
+   ```bash
+   createdb your_database_name
+   ```
+   Or using psql:
+   ```sql
+   CREATE DATABASE your_database_name;
+   ```
+3. Update your `.env` file with the correct `DATABASE_URL` pointing to this database.
 
----
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd bolt-js-install-store-template
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up your environment variables in a `.env` file:
+   ```plaintext
+   DATABASE_URL=your_database_url
+   SLACK_BOT_TOKEN=your_slack_bot_token
+   SLACK_SIGNING_SECRET=your_slack_signing_secret
+   ```
 
-## Architecture Overview
+### Running the Application
+- To start the application in development mode:
+  ```bash
+  npm run dev
+  ```
+- To start the application in production mode:
+  ```bash
+  npm start
+  ```
 
-Slackbrix is intentionally split into two concerns:
+### Prisma Setup
+- Generate Prisma client:
+  ```bash
+  npm run prisma:generate
+  ```
+- Run migrations:
+  ```bash
+  npm run prisma:migrate
+  ```
 
-### Installation & Auth (`install-kit/`)
-Responsible for:
-- OAuth install and callback handling
-- Installation persistence
-- Token resolution per request
-- Enterprise vs workspace install resolution
+## Customization
+- Modify the `src/index.js` file to implement your application's logic.
+- Update the `prisma/schema.prisma` file to define your database schema.
 
-### App Logic (`index.js`)
-Responsible for:
-- Slack events, messages, and commands
-- Using the Slack client injected by Bolt
-- Automatically operating with the correct token per install
-
+## Acknowledgments
+- [Slack Bolt](https://slack.dev/bolt)
+- [Prisma](https://www.prisma.io/)
